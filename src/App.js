@@ -1,8 +1,26 @@
 import { useEffect, useState } from "react";
 
 function App() {
+  const [localIP, setLocalIP] = useState("");
   const [geoIP, setGeoIP] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    //Fetch client IP
+    async function getLocalIP() {
+      try {
+        const response = await fetch("https://jsonip.com/");
+        let data = await response.json();
+        console.log(data);
+        setLocalIP(data.ip);
+        return;
+      } catch (e) {
+        console.log(e);
+        return;
+      }
+    }
+    getLocalIP();
+  }, []);
 
   useEffect(() => {
     localStorage.getItem("geoIP") &&
@@ -36,20 +54,15 @@ function App() {
     <div className="bg-blue-500 h-screen grid">
       <div className="w-[50%] my-auto ml-20">
         {!loading ? (
-          <h1 className="text-[5rem] font-bold mb-10 text-white">
-            JIT mode is cool
-          </h1>
+          <h1 className="text-[5rem] font-bold mb-10 text-white">{localIP}</h1>
         ) : (
           <h1 className="text-[5rem] font-bold mb-10 text-white">
             Loading your app...
           </h1>
         )}
-        <p className="text-white">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
-          officia earum ducimus neque obcaecati consequuntur ratione accusamus
-          at officiis tempore, magnam non debitis fugit unde alias id quidem
-          necessitatibus.
-        </p>
+        <p className="text-white">{geoIP?.location?.country}</p>
+        <p className="text-white">{geoIP?.location?.region}</p>
+        <p className="text-white">{geoIP?.location?.city}</p>
         <button onClick={getGeoIP} className="bg-red-600 w-[100px] h-[50px]">
           Get IP
         </button>
