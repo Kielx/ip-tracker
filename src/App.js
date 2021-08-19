@@ -13,7 +13,7 @@ function App() {
     sessionStorage.setItem("geoIP", JSON.stringify(geoIP));
   }, [geoIP]);
 
-  async function getGeoIP(link) {
+  async function getGeoIP() {
     setLoading(true);
     try {
       const response = await fetch(
@@ -34,9 +34,15 @@ function App() {
   return (
     <div className="bg-blue-500 h-screen grid">
       <div className="w-[50%] my-auto ml-20">
-        <h1 className="text-[5rem] font-bold mb-10 text-white">
-          JIT mode is cool
-        </h1>
+        {!loading ? (
+          <h1 className="text-[5rem] font-bold mb-10 text-white">
+            JIT mode is cool
+          </h1>
+        ) : (
+          <h1 className="text-[5rem] font-bold mb-10 text-white">
+            Loading your app...
+          </h1>
+        )}
         <p className="text-white">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo
           officia earum ducimus neque obcaecati consequuntur ratione accusamus
