@@ -5,12 +5,12 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    sessionStorage.getItem("geoIP") &&
-      setGeoIP(JSON.parse(sessionStorage.getItem("geoIP")));
+    localStorage.getItem("geoIP") &&
+      setGeoIP(JSON.parse(localStorage.getItem("geoIP")));
   }, []);
 
   useEffect(() => {
-    sessionStorage.setItem("geoIP", JSON.stringify(geoIP));
+    localStorage.setItem("geoIP", JSON.stringify(geoIP));
   }, [geoIP]);
 
   async function getGeoIP() {
@@ -26,6 +26,7 @@ function App() {
       console.log(data);
       return setGeoIP(data);
     } catch (e) {
+      setLoading(false);
       console.log(e);
       return;
     }
