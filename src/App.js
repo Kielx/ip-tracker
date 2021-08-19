@@ -37,7 +37,7 @@ function App() {
       const response = await fetch(
         process.env.REACT_APP_GEO_API_KEY
           ? `https://geo.ipify.org/api/v1?apiKey=${process.env.REACT_APP_GEO_API_KEY}`
-          : `/.netlify/functions/getGeoIP`
+          : `/.netlify/functions/getGeoIP?ip=${localIP}`
       );
       let data = await response.json();
       setLoading(false);
