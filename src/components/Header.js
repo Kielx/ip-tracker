@@ -1,7 +1,7 @@
 import React from "react";
 import background from "../assets/images/pattern-bg.png";
 
-const Header = ({ geoIP, searchIP, setSearchIP }) => {
+const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
   return (
     <div
       style={{ backgroundImage: `url(${background})`, zIndex: "2" }}
@@ -19,7 +19,14 @@ const Header = ({ geoIP, searchIP, setSearchIP }) => {
           className="w-[85%]  p-3 rounded-l-2xl font-medium"
         ></input>
 
-        <button className="w-[15%]  bg-gray-800 text-gray-100 rounded-r-2xl  flex justify-center items-center">
+        <button
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            getGeoIP(searchIP);
+          }}
+          className="w-[15%]  bg-gray-800 text-gray-100 rounded-r-2xl  flex justify-center items-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-chevron-right"

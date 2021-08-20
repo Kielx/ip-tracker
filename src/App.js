@@ -61,7 +61,12 @@ function App() {
     <div className="w-full h-full bg-blue-100 m-auto">
       {geoIP ? (
         <>
-          <Header geoIP={geoIP} searchIP={searchIP} setSearchIP={setSearchIP} />
+          <Header
+            geoIP={geoIP}
+            getGeoIP={getGeoIP}
+            searchIP={searchIP}
+            setSearchIP={setSearchIP}
+          />
 
           <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
         </>
