@@ -3,8 +3,10 @@ import Header from "./components/Header";
 import Map from "./components/map";
 
 function App() {
+  //eslint-disable-next-line
   const [localIP, setLocalIP] = useState("");
   const [geoIP, setGeoIP] = useState("");
+  //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [searchIP, setSearchIP] = useState("");
 
