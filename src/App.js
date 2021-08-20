@@ -9,18 +9,6 @@ function App() {
 
   useEffect(() => {
     //Fetch client IP
-    async function getLocalIP() {
-      try {
-        const response = await fetch("https://jsonip.com/");
-        let data = await response.json();
-        setLocalIP(data.ip);
-        return;
-      } catch (e) {
-        console.log(e);
-        return;
-      }
-    }
-    getLocalIP();
   }, []);
 
   async function getGeoIP(IP) {
@@ -42,12 +30,27 @@ function App() {
   }
 
   useEffect(() => {
-    localStorage.getItem("geoIP") &&
-      setGeoIP(JSON.parse(localStorage.getItem("geoIP")));
+    if (sessionStorage.getItem("geoIP") !== null) {
+      setGeoIP(JSON.parse(sessionStorage.getItem("geoIP")));
+    } else {
+      async function getLocalIP() {
+        try {
+          const response = await fetch("https://jsonip.com/");
+          let data = await response.json();
+          setLocalIP(data.ip);
+          getGeoIP(data.ip);
+          return;
+        } catch (e) {
+          console.log(e);
+          return;
+        }
+      }
+      getLocalIP();
+    }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("geoIP", JSON.stringify(geoIP));
+    sessionStorage.setItem("geoIP", JSON.stringify(geoIP));
   }, [geoIP]);
 
   return (
