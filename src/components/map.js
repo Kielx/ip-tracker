@@ -16,6 +16,7 @@ const Map = ({ lat, lng }) => {
       zoom={13}
       scrollWheelZoom={true}
       style={{
+        height: "100%",
         minHeight: "80vh",
         width: "100%",
         zIndex: 0,
