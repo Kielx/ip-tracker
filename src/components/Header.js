@@ -71,7 +71,10 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
           </svg>
         </button>
       </form>
-      <Popover className="flex md:hidden relative w-full  justify-center">
+      <Popover
+        className="flex md:hidden relative w-full  justify-center"
+        style={{ zIndex: "2" }}
+      >
         <Popover.Button className="text-white ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
