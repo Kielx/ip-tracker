@@ -11,7 +11,12 @@ const Map = ({ lat, lng }) => {
   const position = [lat, lng];
 
   return (
-    <MapContainer center={position} zoom={13} scrollWheelZoom={true}>
+    <MapContainer
+      center={position}
+      zoom={13}
+      scrollWheelZoom={true}
+      style={{ height: "70vh", width: "100%", zIndex: 0 }}
+    >
       <MyComponent position={position}></MyComponent>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

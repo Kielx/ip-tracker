@@ -58,11 +58,20 @@ function App() {
   }, [geoIP]);
 
   return (
-    <>
-      <div className="w-full h-full bg-blue-100 m-auto">
-        <Header />
-      </div>
-      <div className="bg-blue-500 h-screen grid">
+    <div className="w-full h-full bg-blue-100 m-auto">
+      {geoIP ? (
+        <>
+          <Header geoIP={geoIP} searchIP={searchIP} setSearchIP={setSearchIP} />
+
+          <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
+        </>
+      ) : (
+        ""
+      )}
+    </div>
+  );
+
+  /* <div className="bg-blue-500 h-screen grid">
         <div className="w-[50%] my-auto ml-20">
           <h1 className="text-center text-3xl font-extrabold text-white">
             IP-Tracker
@@ -95,9 +104,7 @@ function App() {
         {geoIP ? (
           <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
         ) : null}
-      </div>
-    </>
-  );
+      </div> */
 }
 
 export default App;
