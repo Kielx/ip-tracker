@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Header from "./components/Header";
+import Map from "./components/map";
 
 function App() {
   const [localIP, setLocalIP] = useState("");
@@ -51,26 +53,45 @@ function App() {
   }
 
   return (
-    <div className="bg-blue-500 h-screen grid">
-      <div className="w-[50%] my-auto ml-20">
-        <h1 className="text-center text-3xl font-extrabold text-white">
-          IP-Tracker
-        </h1>
-        {!loading ? (
-          <h2 className="text-[5rem] font-bold mb-10 text-white">{localIP}</h2>
-        ) : (
-          <h2 className="text-[5rem] font-bold mb-10 text-white">
-            Loading your app...
-          </h2>
-        )}
-        <p className="text-white">{geoIP?.location?.country}</p>
-        <p className="text-white">{geoIP?.location?.region}</p>
-        <p className="text-white">{geoIP?.location?.city}</p>
-        <button onClick={getGeoIP} className="bg-red-600 w-[100px] h-[50px]">
-          Get IP
-        </button>
+    <>
+      <div className="w-full h-full bg-blue-100 m-auto">
+        <Header />
       </div>
-    </div>
+      <div className="bg-blue-500 h-screen grid">
+        <div className="w-[50%] my-auto ml-20">
+          <h1 className="text-center text-3xl font-extrabold text-white">
+            IP-Tracker
+          </h1>
+          {!loading ? (
+            <h2 className="text-[5rem] font-bold mb-10 text-white">
+              {localIP}
+            </h2>
+          ) : (
+            <h2 className="text-[5rem] font-bold mb-10 text-white">
+              Loading your app...
+            </h2>
+          )}
+          <p className="text-white">{geoIP?.location?.country}</p>
+          <p className="text-white">{geoIP?.location?.region}</p>
+          <p className="text-white">{geoIP?.location?.city}</p>
+          <button
+            onClick={() => getGeoIP(localIP)}
+            className="bg-red-600 w-[100px] h-[50px]"
+          >
+            Get IP
+          </button>
+          <input
+            type="text"
+            value={searchIP}
+            onChange={(e) => setSearchIP(e.target.value)}
+          ></input>
+          <button onClick={() => getGeoIP(searchIP)}>Search for IP</button>
+        </div>
+        {geoIP ? (
+          <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
+        ) : null}
+      </div>
+    </>
   );
 }
 
