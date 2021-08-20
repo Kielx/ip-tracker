@@ -30,7 +30,10 @@ function App() {
   }
 
   useEffect(() => {
-    if (sessionStorage.getItem("geoIP") !== null) {
+    if (
+      sessionStorage.getItem("geoIP") !== null &&
+      sessionStorage.getItem("geoIP") !== ""
+    ) {
       setGeoIP(JSON.parse(sessionStorage.getItem("geoIP")));
     } else {
       async function getLocalIP() {
