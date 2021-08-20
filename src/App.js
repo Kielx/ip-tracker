@@ -5,6 +5,7 @@ function App() {
   const [localIP, setLocalIP] = useState("");
   const [geoIP, setGeoIP] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchIP, setSearchIP] = useState("");
 
   useEffect(() => {
     //Fetch client IP
@@ -71,6 +72,12 @@ function App() {
         >
           Get IP
         </button>
+        <input
+          type="text"
+          value={searchIP}
+          onChange={(e) => setSearchIP(e.target.value)}
+        ></input>
+        <button onClick={() => getGeoIP(searchIP)}>Search for IP</button>
       </div>
       {geoIP ? (
         <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
