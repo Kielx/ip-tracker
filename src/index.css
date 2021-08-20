@@ -652,6 +652,9 @@ video {
 .max-w-lg {
 	max-width: 32rem;
 }
+.max-w-md {
+	max-width: 28rem;
+}
 .scale-95 {
 	--tw-scale-x: .95;
 	--tw-scale-y: .95;

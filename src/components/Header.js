@@ -100,7 +100,7 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
         >
-          <Popover.Panel className="absolute -bottom-72 z-10 w-full bg-white rounded-2xl shadow-xl py-6 space-y-1">
+          <Popover.Panel className="absolute -bottom-72 z-10 w-full max-w-md bg-white rounded-2xl shadow-xl py-6 space-y-1">
             {menu}
           </Popover.Panel>
         </Transition>
