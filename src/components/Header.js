@@ -5,14 +5,16 @@ const Header = () => {
   return (
     <div
       style={{ backgroundImage: `url(${background})` }}
-      className="w-full h-[40vh] bg-cover bg-left  flex flex-col items-center pt-5 space-y-5 px-4"
+      className="w-full h-[30vh] bg-cover bg-left  flex flex-col items-center pt-5 space-y-5 md:space-y-8 px-4 xl:px-52 relative"
     >
-      <span className="text-2xl text-white font-bold">IP Address Tracker</span>
-      <form className="w-full flex">
+      <span className="text-2xl md:text-3xl text-white font-bold">
+        IP Address Tracker
+      </span>
+      <form className="w-full max-w-lg flex">
         <input
           type="text"
           value="192.212.174.101"
-          className="w-[85%]  p-4 rounded-l-2xl font-medium"
+          className="w-[85%]  p-3 rounded-l-2xl font-medium"
         ></input>
         <button className="w-[15%]  bg-gray-800 text-gray-100 rounded-r-2xl  flex justify-center items-center">
           <svg
@@ -32,22 +34,25 @@ const Header = () => {
           </svg>
         </button>
       </form>
-      <div className="w-full flex flex-col space-y-3 bg-white rounded-2xl py-6">
+      <div className="md:py-10 md:absolute w-full max-w-lg md:max-w-full md:-bottom-16 md:w-[90%] lg:w-[75%] flex flex-col space-y-1 bg-white rounded-2xl py-6  md:flex-row md:space-y-0 md:px-10 md:space-x-10 md:justify-around lg:px-20">
         <div className="flex flex-col justify-center items-center">
           <div className="text-xs font-extrabold text-gray-500">IP ADDRESS</div>
-          <div className="text-xl font-extrabold">192.212.174.101</div>
+          <div className="md:text-xl font-extrabold">192.212.174.101</div>
         </div>
+        <div className="spacer w-[1.5px] h-full bg-gray-300"></div>
         <div className="flex flex-col justify-center items-center">
           <div className="text-xs font-extrabold text-gray-500">LOCATION</div>
-          <div className="text-xl font-extrabold">Brooklyn, NY 10001</div>
+          <div className="md:text-xl font-extrabold">Brooklyn, NY 10001</div>
         </div>
+        <div className="spacer w-[1.5px] h-full bg-gray-300"></div>
         <div className="flex flex-col justify-center items-center">
           <div className="text-xs font-extrabold text-gray-500">TIMEZONE</div>
-          <div className="text-xl font-extrabold">UTC-05:00</div>
+          <div className="md:text-xl font-extrabold">UTC-05:00</div>
         </div>
+        <div className="spacer w-[1.5px] h-full bg-gray-300"></div>
         <div className="flex flex-col justify-center items-center">
           <div className="text-xs font-extrabold text-gray-500">ISP</div>
-          <div className="text-xl font-extrabold">SpaceX Starlink</div>
+          <div className="md:text-xl font-extrabold">SpaceX Starlink</div>
         </div>
       </div>
     </div>
