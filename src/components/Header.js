@@ -46,13 +46,16 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
       </form>
       <div
         style={{ zIndex: "2" }}
-        className="shadow-xl md:py-10 md:absolute w-full max-w-lg md:max-w-full md:-bottom-16 md:w-[90%] lg:w-[75%] flex flex-col space-y-1 bg-white rounded-2xl py-6  md:flex-row md:space-y-0 md:px-10 md:space-x-10 md:justify-around lg:px-20"
+        className={`shadow-xl  xl:py-10 w-full max-w-lg md:max-w-full md:-bottom-16 md:w-[90%] lg:w-[75%] flex flex-col space-y-1 bg-white rounded-2xl py-6  md:flex-row md:space-y-0 md:px-10 md:space-x-10 md:justify-around lg:px-20 ${
+          window.innerHeight < 800 ? "static" : "md:absolute"
+        }`}
       >
+        {console.log(window.innerHeight)}
         <div className="flex flex-col justify-center items-center">
           <div className="text-xs font-extrabold text-gray-500">IP ADDRESS</div>
           <div className="md:text-xl font-extrabold">{geoIP.ip}</div>
         </div>
-        <div className="spacer w-[1.5px] h-full bg-gray-300"></div>
+        <div className="spacer w-[1px] h-full bg-gray-300"></div>
         <div className="flex flex-col justify-center items-center">
           <div className="text-xs font-extrabold text-gray-500">LOCATION</div>
           <div className="md:text-xl font-extrabold">{`${geoIP.location.country}, ${geoIP.location.region}, ${geoIP.location.city}`}</div>
