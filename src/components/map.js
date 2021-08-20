@@ -15,7 +15,12 @@ const Map = ({ lat, lng }) => {
       center={position}
       zoom={13}
       scrollWheelZoom={true}
-      style={{ height: "70vh", width: "100%", zIndex: 0 }}
+      style={{
+        height: "100%",
+        minHeight: "80vh",
+        width: "100%",
+        zIndex: 0,
+      }}
     >
       <MyComponent position={position}></MyComponent>
       <TileLayer

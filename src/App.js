@@ -60,7 +60,7 @@ function App() {
   }, [geoIP]);
 
   return (
-    <div className="w-full h-full bg-blue-100 m-auto">
+    <div className="w-screen h-screen bg-blue-100 m-auto overflow-hidden">
       {geoIP ? (
         <>
           <Header
