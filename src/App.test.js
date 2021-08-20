@@ -3,6 +3,6 @@ import App from "./App";
 
 test("renders learn react link", () => {
   render(<App />);
-  const linkElement = screen.getByText(/JIT mode is cool/i);
+  const linkElement = screen.getByText(/Ip-tracker/i);
   expect(linkElement).toBeInTheDocument();
 });

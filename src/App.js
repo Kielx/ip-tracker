@@ -53,12 +53,15 @@ function App() {
   return (
     <div className="bg-blue-500 h-screen grid">
       <div className="w-[50%] my-auto ml-20">
+        <h1 className="text-center text-3xl font-extrabold text-white">
+          IP-Tracker
+        </h1>
         {!loading ? (
-          <h1 className="text-[5rem] font-bold mb-10 text-white">{localIP}</h1>
+          <h2 className="text-[5rem] font-bold mb-10 text-white">{localIP}</h2>
         ) : (
-          <h1 className="text-[5rem] font-bold mb-10 text-white">
+          <h2 className="text-[5rem] font-bold mb-10 text-white">
             Loading your app...
-          </h1>
+          </h2>
         )}
         <p className="text-white">{geoIP?.location?.country}</p>
         <p className="text-white">{geoIP?.location?.region}</p>

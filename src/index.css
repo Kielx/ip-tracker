@@ -574,8 +574,18 @@ video {
 	--tw-bg-opacity: 1;
 	background-color: rgba(220, 38, 38, var(--tw-bg-opacity));
 }
+.text-center {
+	text-align: center;
+}
+.text-3xl {
+	font-size: 1.875rem;
+	line-height: 2.25rem;
+}
 .text-\[5rem\] {
 	font-size: 5rem;
+}
+.font-extrabold {
+	font-weight: 800;
 }
 .font-bold {
 	font-weight: 700;
