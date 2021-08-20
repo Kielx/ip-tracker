@@ -1,47 +1,26 @@
 import { useEffect, useState } from "react";
+import Map from "./components/map";
 
 function App() {
   const [localIP, setLocalIP] = useState("");
   const [geoIP, setGeoIP] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchIP, setSearchIP] = useState("");
 
   useEffect(() => {
     //Fetch client IP
-    async function getLocalIP() {
-      try {
-        const response = await fetch("https://jsonip.com/");
-        let data = await response.json();
-        console.log(data);
-        setLocalIP(data.ip);
-        return;
-      } catch (e) {
-        console.log(e);
-        return;
-      }
-    }
-    getLocalIP();
   }, []);
 
-  useEffect(() => {
-    localStorage.getItem("geoIP") &&
-      setGeoIP(JSON.parse(localStorage.getItem("geoIP")));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("geoIP", JSON.stringify(geoIP));
-  }, [geoIP]);
-
-  async function getGeoIP() {
+  async function getGeoIP(IP) {
     setLoading(true);
     try {
       const response = await fetch(
         process.env.REACT_APP_GEO_API_KEY
-          ? `https://geo.ipify.org/api/v1?apiKey=${process.env.REACT_APP_GEO_API_KEY}`
-          : `/.netlify/functions/getGeoIP?ip=${localIP}`
+          ? `https://geo.ipify.org/api/v1?apiKey=${process.env.REACT_APP_GEO_API_KEY}&ipAddress=${IP}`
+          : `/.netlify/functions/getGeoIP?ip=${IP}`
       );
       let data = await response.json();
       setLoading(false);
-      console.log(data);
       return setGeoIP(data);
     } catch (e) {
       setLoading(false);
@@ -49,6 +28,33 @@ function App() {
       return;
     }
   }
+
+  useEffect(() => {
+    if (
+      sessionStorage.getItem("geoIP") !== null &&
+      sessionStorage.getItem("geoIP") !== ""
+    ) {
+      setGeoIP(JSON.parse(sessionStorage.getItem("geoIP")));
+    } else {
+      async function getLocalIP() {
+        try {
+          const response = await fetch("https://jsonip.com/");
+          let data = await response.json();
+          setLocalIP(data.ip);
+          getGeoIP(data.ip);
+          return;
+        } catch (e) {
+          console.log(e);
+          return;
+        }
+      }
+      getLocalIP();
+    }
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("geoIP", JSON.stringify(geoIP));
+  }, [geoIP]);
 
   return (
     <div className="bg-blue-500 h-screen grid">
@@ -66,10 +72,22 @@ function App() {
         <p className="text-white">{geoIP?.location?.country}</p>
         <p className="text-white">{geoIP?.location?.region}</p>
         <p className="text-white">{geoIP?.location?.city}</p>
-        <button onClick={getGeoIP} className="bg-red-600 w-[100px] h-[50px]">
+        <button
+          onClick={() => getGeoIP(localIP)}
+          className="bg-red-600 w-[100px] h-[50px]"
+        >
           Get IP
         </button>
+        <input
+          type="text"
+          value={searchIP}
+          onChange={(e) => setSearchIP(e.target.value)}
+        ></input>
+        <button onClick={() => getGeoIP(searchIP)}>Search for IP</button>
       </div>
+      {geoIP ? (
+        <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
+      ) : null}
     </div>
   );
 }
