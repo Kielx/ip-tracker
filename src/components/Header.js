@@ -1,30 +1,30 @@
 import React from "react";
 import background from "../assets/images/pattern-bg.png";
-import { Popover } from "@headlessui/react";
+import { Popover, Transition } from "@headlessui/react";
 
 const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
   const menu = (
     <>
       <div className="flex flex-col justify-center items-center">
         <div className="text-xs font-extrabold text-gray-500">IP ADDRESS</div>
-        <div className="md:text-xl font-extrabold text-center">{geoIP.ip}</div>
+        <div className="text-xl font-extrabold text-center">{geoIP.ip}</div>
       </div>
       <div className="spacer w-[10px] h-full bg-gray-800"></div>
       <div className="flex flex-col justify-center items-center">
         <div className="text-xs font-extrabold text-gray-500">LOCATION</div>
-        <div className="md:text-xl font-extrabold text-center">{`${geoIP.location.country}, ${geoIP.location.region}, ${geoIP.location.city}`}</div>
+        <div className="text-xl font-extrabold text-center">{`${geoIP.location.country}, ${geoIP.location.region}, ${geoIP.location.city}`}</div>
       </div>
       <div className="spacer w-[1.5px] h-full bg-gray-300"></div>
       <div className="flex flex-col justify-center items-center">
         <div className="text-xs font-extrabold text-gray-500">TIMEZONE</div>
-        <div className="md:text-xl font-extrabold text-center">
+        <div className="text-xl font-extrabold text-center">
           {geoIP.location.timezone}
         </div>
       </div>
       <div className="spacer w-1 h-full bg-gray-800"></div>
       <div className="flex flex-col justify-center items-center">
         <div className="text-xs font-extrabold text-gray-500">ISP</div>
-        <div className="md:text-xl font-extrabold text-center">{geoIP.isp}</div>
+        <div className="text-xl font-extrabold text-center">{geoIP.isp}</div>
       </div>
     </>
   );
@@ -52,7 +52,7 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
             e.preventDefault();
             getGeoIP(searchIP);
           }}
-          className="w-[15%]  bg-gray-800 text-gray-100 rounded-r-2xl  flex justify-center items-center"
+          className="w-[15%]  hover:bg-indigo-800 transition-all bg-gray-800 text-gray-100 rounded-r-2xl  flex justify-center items-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -72,10 +72,10 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
         </button>
       </form>
       <Popover
-        className="flex md:hidden relative w-full  justify-center"
+        className=" md:hidden  relative flex w-full  justify-center"
         style={{ zIndex: "2" }}
       >
-        <Popover.Button className="text-white ">
+        <Popover.Button className="text-white hover:text-indigo-400 transition-all ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-10 w-10"
@@ -91,9 +91,19 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
             />
           </svg>
         </Popover.Button>
-        <Popover.Panel className="absolute -bottom-56 z-10 w-full bg-white rounded-2xl shadow-xl py-6">
-          {menu}
-        </Popover.Panel>
+        <Transition
+          className="absolute flex w-full  justify-center"
+          enter="transition duration-100 ease-out"
+          enterFrom="transform scale-95 opacity-0"
+          enterTo="transform scale-100 opacity-100"
+          leave="transition duration-75 ease-out"
+          leaveFrom="transform scale-100 opacity-100"
+          leaveTo="transform scale-95 opacity-0"
+        >
+          <Popover.Panel className="absolute -bottom-72 z-10 w-full bg-white rounded-2xl shadow-xl py-6 space-y-1">
+            {menu}
+          </Popover.Panel>
+        </Transition>
       </Popover>
       <div
         style={{ zIndex: "2" }}
