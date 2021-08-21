@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
-import Header from "./components/Header";
-import Map from "./components/map";
+import React, { useEffect, useState, Suspense } from "react";
+import "./App.css";
+import LoadingSpinner from "./components/LoadingSpinner";
+const Header = React.lazy(() => import("./components/Header"));
+const Map = React.lazy(() => import("./components/Map"));
 
 function App() {
   //eslint-disable-next-line
   const [localIP, setLocalIP] = useState("");
   const [geoIP, setGeoIP] = useState("");
   //eslint-disable-next-line
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [searchIP, setSearchIP] = useState("");
 
   useEffect(() => {
@@ -38,6 +40,7 @@ function App() {
       sessionStorage.getItem("geoIP") !== ""
     ) {
       setGeoIP(JSON.parse(sessionStorage.getItem("geoIP")));
+      setLoading(false);
     } else {
       async function getLocalIP() {
         try {
@@ -60,58 +63,26 @@ function App() {
   }, [geoIP]);
 
   return (
-    <div className="w-screen h-screen bg-blue-100 m-auto overflow-hidden">
-      {geoIP ? (
+    <div className="w-screen h-screen bg-[#F2EFE9] m-auto overflow-hidden">
+      {geoIP && !loading ? (
         <>
-          <Header
-            geoIP={geoIP}
-            getGeoIP={getGeoIP}
-            searchIP={searchIP}
-            setSearchIP={setSearchIP}
-          />
-
-          <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Header
+              geoIP={geoIP}
+              getGeoIP={getGeoIP}
+              searchIP={searchIP}
+              setSearchIP={setSearchIP}
+            />
+          </Suspense>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
+          </Suspense>
         </>
       ) : (
-        ""
+        <LoadingSpinner />
       )}
     </div>
   );
-
-  /* <div className="bg-blue-500 h-screen grid">
-        <div className="w-[50%] my-auto ml-20">
-          <h1 className="text-center text-3xl font-extrabold text-white">
-            IP-Tracker
-          </h1>
-          {!loading ? (
-            <h2 className="text-[5rem] font-bold mb-10 text-white">
-              {localIP}
-            </h2>
-          ) : (
-            <h2 className="text-[5rem] font-bold mb-10 text-white">
-              Loading your app...
-            </h2>
-          )}
-          <p className="text-white">{geoIP?.location?.country}</p>
-          <p className="text-white">{geoIP?.location?.region}</p>
-          <p className="text-white">{geoIP?.location?.city}</p>
-          <button
-            onClick={() => getGeoIP(localIP)}
-            className="bg-red-600 w-[100px] h-[50px]"
-          >
-            Get IP
-          </button>
-          <input
-            type="text"
-            value={searchIP}
-            onChange={(e) => setSearchIP(e.target.value)}
-          ></input>
-          <button onClick={() => getGeoIP(searchIP)}>Search for IP</button>
-        </div>
-        {geoIP ? (
-          <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
-        ) : null}
-      </div> */
 }
 
 export default App;
