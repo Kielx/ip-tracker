@@ -1,19 +1,24 @@
 import React from "react";
 import background from "../assets/images/pattern-bg.png";
 import { Popover, Transition } from "@headlessui/react";
-import LoadingSpinner from "./LoadingSpinner";
 
 const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
+  let menuItems;
   if (!geoIP) {
-    return <LoadingSpinner />;
+    menuItems = {
+      ipAdress: "1.1.1.1",
+      location: `AU, State of New South Wales, Sydney`,
+      timezone: "+10:00",
+      isp: "Cloudflare, Inc.",
+    };
+  } else {
+    menuItems = {
+      ipAdress: geoIP.ip,
+      location: `${geoIP.location.country}, ${geoIP.location.region}, ${geoIP.location.city}`,
+      timezone: geoIP.location.timezone,
+      isp: geoIP.isp,
+    };
   }
-
-  const menuItems = {
-    ipAdress: geoIP.ip,
-    location: `${geoIP.location.country}, ${geoIP.location.region}, ${geoIP.location.city}`,
-    timezone: geoIP.location.timezone,
-    isp: geoIP.isp,
-  };
 
   const mappedMenuItems = Object.keys(menuItems).map((key, index) => {
     return (
@@ -30,7 +35,7 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
 
   return (
     <div
-      style={{ backgroundImage: `url(${background})`, zIndex: "2" }}
+      style={{ backgroundImage: `url(${background})`, zIndex: "50" }}
       className="lg:pb-24 w-full  bg-cover bg-left  flex flex-col items-center py-6 space-y-5 md:space-y-8 px-4 xl:px-52 relative"
     >
       <span className="text-2xl md:text-3xl text-white font-bold">
