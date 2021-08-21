@@ -2,7 +2,6 @@ import React, { useEffect, useState, Suspense } from "react";
 import "./App.css";
 import LoadingSpinner from "./components/LoadingSpinner";
 const Header = React.lazy(() => import("./components/Header"));
-//eslint-disable-next-line
 const Map = React.lazy(() => import("./components/Map"));
 
 function App() {
@@ -70,9 +69,9 @@ function App() {
             setSearchIP={setSearchIP}
           />
         </Suspense>
-        {/*         <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<LoadingSpinner />}>
           <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
-        </Suspense> */}
+        </Suspense>
       </>
     </div>
   );
