@@ -2,6 +2,7 @@ import React, { useEffect, useState, Suspense } from "react";
 import "./App.css";
 import LoadingSpinner from "./components/LoadingSpinner";
 const Header = React.lazy(() => import("./components/Header"));
+//eslint-disable-next-line
 const Map = React.lazy(() => import("./components/Map"));
 
 function App() {
