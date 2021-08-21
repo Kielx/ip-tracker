@@ -44,12 +44,13 @@ function App() {
     } else {
       async function getLocalIP() {
         try {
-          const response = await fetch("https://jsonip.com/");
+          const response = await fetch("https://jsonip.com", { mode: "cors" });
           let data = await response.json();
           setLocalIP(data.ip);
           getGeoIP(data.ip);
           return;
         } catch (e) {
+          getGeoIP("1.1.1.1");
           console.log(e);
           return;
         }
