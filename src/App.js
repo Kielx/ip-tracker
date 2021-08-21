@@ -39,7 +39,7 @@ function App() {
     } else {
       async function getLocalIP() {
         try {
-          const response = await fetch("https://jsonip.com", { mode: "cors" });
+          const response = await fetch("https://jsonip.com");
           let data = await response.json();
           setLocalIP(data.ip);
           getGeoIP(data.ip);
