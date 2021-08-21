@@ -16,17 +16,20 @@ function App() {
   }, []);
 
   async function getGeoIP(IP) {
-    try {
-      const response = await fetch(
-        process.env.REACT_APP_GEO_API_KEY
-          ? `https://geo.ipify.org/api/v1?apiKey=${process.env.REACT_APP_GEO_API_KEY}&ipAddress=${IP}`
-          : `/.netlify/functions/getGeoIP?ip=${IP}`
-      );
-      let data = await response.json();
-      return setGeoIP(data);
-    } catch (e) {
-      console.log(e);
-      return;
+    const ipRegexp = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}$/;
+    if (ipRegexp.test(IP)) {
+      try {
+        const response = await fetch(
+          process.env.REACT_APP_GEO_API_KEY
+            ? `https://geo.ipify.org/api/v1?apiKey=${process.env.REACT_APP_GEO_API_KEY}&ipAddress=${IP}`
+            : `/.netlify/functions/getGeoIP?ip=${IP}`
+        );
+        let data = await response.json();
+        return setGeoIP(data);
+      } catch (e) {
+        console.log(e);
+        return;
+      }
     }
   }
 
