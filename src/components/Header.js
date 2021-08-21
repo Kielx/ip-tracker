@@ -3,31 +3,25 @@ import background from "../assets/images/pattern-bg.png";
 import { Popover, Transition } from "@headlessui/react";
 
 const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
-  const menu = (
-    <>
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-xs font-extrabold text-gray-500">IP ADDRESS</div>
-        <div className="text-xl font-extrabold text-center">{geoIP.ip}</div>
-      </div>
-      <div className="spacer w-[10px] h-full bg-gray-800"></div>
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-xs font-extrabold text-gray-500">LOCATION</div>
-        <div className="text-xl font-extrabold text-center">{`${geoIP.location.country}, ${geoIP.location.region}, ${geoIP.location.city}`}</div>
-      </div>
-      <div className="spacer w-[1.5px] h-full bg-gray-300"></div>
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-xs font-extrabold text-gray-500">TIMEZONE</div>
-        <div className="text-xl font-extrabold text-center">
-          {geoIP.location.timezone}
+  const menuItems = {
+    ipAdress: geoIP.ip,
+    location: `${geoIP.location.country}, ${geoIP.location.region}, ${geoIP.location.city}`,
+    timezone: geoIP.location.timezone,
+    isp: geoIP.isp,
+  };
+
+  const mappedMenuItems = Object.keys(menuItems).map((key, index) => {
+    return (
+      <div key={index} className="flex flex-col justify-center items-center">
+        <div className="uppercase text-xs font-extrabold text-gray-500">
+          {key}
+        </div>
+        <div className="uppercase text-xl font-extrabold text-center">
+          {menuItems[key]}
         </div>
       </div>
-      <div className="spacer w-1 h-full bg-gray-800"></div>
-      <div className="flex flex-col justify-center items-center">
-        <div className="text-xs font-extrabold text-gray-500">ISP</div>
-        <div className="text-xl font-extrabold text-center">{geoIP.isp}</div>
-      </div>
-    </>
-  );
+    );
+  });
 
   return (
     <div
@@ -101,7 +95,7 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
           leaveTo="transform scale-95 opacity-0"
         >
           <Popover.Panel className="absolute -bottom-72 z-10 w-full max-w-md bg-white rounded-2xl shadow-xl py-6 space-y-1">
-            {menu}
+            {mappedMenuItems}
           </Popover.Panel>
         </Transition>
       </Popover>
@@ -111,7 +105,7 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
         }`} */
         className={`hidden shadow-xl md:flex flex-row w-[90%] lg:w-[75%] space-x-4 lg:space-x-10 bg-white p-10 absolute -bottom-40 lg:-bottom-16 justify-around items-start rounded-2xl`}
       >
-        {menu}
+        {mappedMenuItems}
       </div>
     </div>
   );
