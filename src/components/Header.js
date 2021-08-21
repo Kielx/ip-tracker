@@ -36,7 +36,7 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
   return (
     <div
       style={{ backgroundImage: `url(${background})`, zIndex: "50" }}
-      className="lg:pb-24 w-full  bg-cover bg-left  flex flex-col items-center py-6 space-y-5 md:space-y-8 px-4 xl:px-52 relative"
+      className="lg:pb-24 w-full  bg-cover bg-left  flex flex-col items-center py-6 space-y-5 md:space-y-8 px-4 xl:px-52 absolute"
     >
       <span className="text-2xl md:text-3xl text-white font-bold">
         IP Address Tracker
