@@ -69,9 +69,9 @@ function App() {
             setSearchIP={setSearchIP}
           />
         </Suspense>
-        <Suspense fallback={<LoadingSpinner />}>
+        {/*         <Suspense fallback={<LoadingSpinner />}>
           <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
-        </Suspense>
+        </Suspense> */}
       </>
     </div>
   );
