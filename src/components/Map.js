@@ -1,5 +1,6 @@
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import LoadingSpinner from "./LoadingSpinner";
 
 function MyComponent({ position }) {
   const map = useMap();
@@ -8,6 +9,10 @@ function MyComponent({ position }) {
 }
 
 const Map = ({ lat, lng }) => {
+  if (!lat || !lng) {
+    return <LoadingSpinner />;
+  }
+
   const position = [lat, lng];
 
   return (

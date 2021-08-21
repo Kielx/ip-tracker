@@ -9,7 +9,6 @@ function App() {
   const [localIP, setLocalIP] = useState("");
   const [geoIP, setGeoIP] = useState("");
   //eslint-disable-next-line
-  const [loading, setLoading] = useState(true);
   const [searchIP, setSearchIP] = useState("");
 
   useEffect(() => {
@@ -17,7 +16,6 @@ function App() {
   }, []);
 
   async function getGeoIP(IP) {
-    setLoading(true);
     try {
       const response = await fetch(
         process.env.REACT_APP_GEO_API_KEY
@@ -25,10 +23,8 @@ function App() {
           : `/.netlify/functions/getGeoIP?ip=${IP}`
       );
       let data = await response.json();
-      setLoading(false);
       return setGeoIP(data);
     } catch (e) {
-      setLoading(false);
       console.log(e);
       return;
     }
@@ -40,7 +36,6 @@ function App() {
       sessionStorage.getItem("geoIP") !== ""
     ) {
       setGeoIP(JSON.parse(sessionStorage.getItem("geoIP")));
-      setLoading(false);
     } else {
       async function getLocalIP() {
         try {
@@ -65,23 +60,19 @@ function App() {
 
   return (
     <div className="w-screen h-screen bg-[#F2EFE9] m-auto overflow-hidden">
-      {geoIP && !loading ? (
-        <>
-          <Suspense fallback={<LoadingSpinner />}>
-            <Header
-              geoIP={geoIP}
-              getGeoIP={getGeoIP}
-              searchIP={searchIP}
-              setSearchIP={setSearchIP}
-            />
-          </Suspense>
-          <Suspense fallback={<LoadingSpinner />}>
-            <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
-          </Suspense>
-        </>
-      ) : (
-        <LoadingSpinner />
-      )}
+      <>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Header
+            geoIP={geoIP}
+            getGeoIP={getGeoIP}
+            searchIP={searchIP}
+            setSearchIP={setSearchIP}
+          />
+        </Suspense>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
+        </Suspense>
+      </>
     </div>
   );
 }

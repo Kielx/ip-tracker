@@ -1,8 +1,13 @@
 import React from "react";
 import background from "../assets/images/pattern-bg.png";
 import { Popover, Transition } from "@headlessui/react";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
+  if (!geoIP) {
+    return <LoadingSpinner />;
+  }
+
   const menuItems = {
     ipAdress: geoIP.ip,
     location: `${geoIP.location.country}, ${geoIP.location.region}, ${geoIP.location.city}`,
