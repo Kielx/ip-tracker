@@ -1,5 +1,5 @@
 import React from "react";
-import background from "../assets/images/pattern-bg.png";
+import background from "../assets/images/pattern-bg.webp";
 import { Popover, Transition } from "@headlessui/react";
 
 const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
