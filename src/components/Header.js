@@ -13,7 +13,8 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
     };
   } else if (geoIP?.code === 400) {
     menuItems = {
-      Error: "An error occured. Please try again with different address.",
+      Error:
+        "AN ERROR OCCURRED. PLEASE TRY AGAIN WITH A DIFFERENT ADDRESS OR DOMAIN.",
     };
   } else {
     menuItems = {
