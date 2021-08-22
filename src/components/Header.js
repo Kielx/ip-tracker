@@ -4,19 +4,23 @@ import { Popover, Transition } from "@headlessui/react";
 
 const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
   let menuItems;
-  if (!geoIP) {
+  if (!geoIP || geoIP === "" || geoIP === "undefined" || geoIP === "null") {
     menuItems = {
       ipAdress: "1.1.1.1",
       location: `AU, State of New South Wales, Sydney`,
       timezone: "+10:00",
       isp: "Cloudflare, Inc.",
     };
+  } else if (geoIP?.code === 400) {
+    menuItems = {
+      Error: "An error occured. Please try again with different address.",
+    };
   } else {
     menuItems = {
-      ipAdress: geoIP.ip,
-      location: `${geoIP.location.country}, ${geoIP.location.region}, ${geoIP.location.city}`,
-      timezone: geoIP.location.timezone,
-      isp: geoIP.isp,
+      ipAdress: geoIP?.ip,
+      location: `${geoIP?.location?.country}, ${geoIP?.location?.region}, ${geoIP?.location?.city}`,
+      timezone: geoIP?.location?.timezone,
+      isp: geoIP?.isp,
     };
   }
 
