@@ -1,8 +1,12 @@
 import React, { useEffect, useState, Suspense } from "react";
-import "./App.css";
 import LoadingSpinner from "./components/LoadingSpinner";
-const Header = React.lazy(() => import("./components/Header"));
-const Map = React.lazy(() => import("./components/Map"));
+import "./App.css";
+const Header = React.lazy(() =>
+  import(/* webpackChunkName: "Header" */ "./components/Header")
+);
+const Map = React.lazy(() =>
+  import(/* webpackChunkName: "Map" */ "./components/Map")
+);
 
 function App() {
   //eslint-disable-next-line

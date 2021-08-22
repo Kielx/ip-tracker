@@ -38,12 +38,12 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
       style={{ backgroundImage: `url(${background})`, zIndex: "50" }}
       className="lg:pb-24 w-full  bg-cover bg-left  flex flex-col items-center py-6 space-y-5 md:space-y-8 px-4 xl:px-52 absolute"
     >
-      <span className="text-2xl md:text-3xl text-white font-bold">
+      <h1 className="text-2xl md:text-3xl text-white font-bold">
         IP Address Tracker
-      </span>
+      </h1>
       <form className="w-full max-w-lg flex">
         <input
-          placeholder={geoIP.ip}
+          placeholder="Search for IP adress"
           type="text"
           value={searchIP}
           onChange={(e) => setSearchIP(e.target.value)}
@@ -52,6 +52,7 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
 
         <button
           type="submit"
+          aria-label="Search"
           onClick={(e) => {
             e.preventDefault();
             getGeoIP(searchIP);
@@ -79,7 +80,10 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
         className=" md:hidden  relative flex w-full  justify-center"
         style={{ zIndex: "2" }}
       >
-        <Popover.Button className="text-white hover:text-indigo-400 transition-all ">
+        <Popover.Button
+          className="text-white hover:text-indigo-400 transition-all "
+          aria-label="Show IP details"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-10 w-10"
