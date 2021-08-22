@@ -67,19 +67,15 @@ function App() {
 
   return (
     <div className="w-screen h-screen bg-[#F2EFE9] m-auto overflow-hidden">
-      <>
-        <Suspense fallback={<LoadingSpinner />}>
-          <Header
-            geoIP={geoIP}
-            getGeoIP={getGeoIP}
-            searchIP={searchIP}
-            setSearchIP={setSearchIP}
-          />
-        </Suspense>
-        <Suspense fallback={<LoadingSpinner />}>
-          <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
-        </Suspense>
-      </>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Header
+          geoIP={geoIP}
+          getGeoIP={getGeoIP}
+          searchIP={searchIP}
+          setSearchIP={setSearchIP}
+        />
+        <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
+      </Suspense>
     </div>
   );
 }
