@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 
 exports.handler = async (event, context) => {
-  const API_ENDPOINT = `https://geo.ipify.org/api/v1?apiKey=${process.env.GEO_API_KEY}&ipAddress=${event.queryStringParameters.ip}`;
+  const API_ENDPOINT = `https://geo.ipify.org/api/v1?apiKey=${process.env.GEO_API_KEY}&${event.queryStringParameters.query}=${event.queryStringParameters.ip}`;
   console.log(event);
   console.log(context);
   try {
