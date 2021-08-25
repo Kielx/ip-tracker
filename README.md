@@ -55,8 +55,9 @@ The project was another small step in my Web Developer journey. It strengthened 
 
 ## Acknowledgments
 
-Again used beautiful CSS spinner from [Loading.io](https://loading.io/css/) 
-This is a solution to the [URL Shortener on Frontend Mentor](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G)
+- Again used beautiful CSS spinner from [Loading.io](https://loading.io/css/) 
+- This is a solution to the [URL Shortener on Frontend Mentor](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G)
+
 Huge thanks to authors of API's that I used in this project:
   - https://getjsonip.com/
   - https://geo.ipify.org/
