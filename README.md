@@ -33,7 +33,7 @@ The challenge consisted of three external API's usage, state management, respons
 
 ### Video of app working
 
-https://raw.githubusercontent.com/Kielx/ip-tracker/master/screenshots/IP-tracker-view.mp4
+https://user-images.githubusercontent.com/51516375/130857965-c57eaeaf-ac65-40aa-a73a-a83aa81426d9.mp4
 
 ### Built with
 
