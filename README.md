@@ -10,7 +10,7 @@ Providing visual map of location and details.
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
+  - [Video](#video)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Author](#author)
@@ -31,7 +31,7 @@ The challenge consisted of three external API's usage, state management, respons
 -See their own IP Address on the map on the initial page load
 -Search for any IP addresses or domains and see the key information and location
 
-### Video of app working
+### Video
 
 https://user-images.githubusercontent.com/51516375/130857965-c57eaeaf-ac65-40aa-a73a-a83aa81426d9.mp4
 
