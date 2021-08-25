@@ -31,11 +31,9 @@ The challenge consisted of three external API's usage, state management, respons
 -See their own IP Address on the map on the initial page load
 -Search for any IP addresses or domains and see the key information and location
 
-### Screenshot
+### Video of app working
 
-<div align="center">
-<img alt="Presentation of app workings" src="https://raw.githubusercontent.com/Kielx/ip-tracker/master/screenshots/IP-tracker-view.mp4" width="400" />
-</div>
+https://raw.githubusercontent.com/Kielx/ip-tracker/master/screenshots/IP-tracker-view.mp4
 
 ### Built with
 
