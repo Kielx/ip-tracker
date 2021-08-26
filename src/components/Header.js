@@ -120,9 +120,7 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
       </Popover>
       <div
         style={{ zIndex: "2" }}
-        /*         className={`hidden shadow-xl "md:absolute" xl:py-10 w-full max-w-lg md:max-w-full md:-bottom-16 md:w-[90%] lg:w-[75%] md:flex flex-col space-y-1 bg-white rounded-2xl py-6  md:flex-row md:space-y-0 md:px-10 md:space-x-10 md:justify-around lg:px-20 
-        }`} */
-        className={`hidden shadow-xl md:flex flex-row w-[90%] lg:w-[75%] space-x-4 lg:space-x-10 bg-white p-10 absolute -bottom-40 lg:-bottom-16 justify-around items-start rounded-2xl`}
+        className={`hidden shadow-xl md:flex flex-row w-[90%] 2xl:w-[75%] space-x-4 lg:space-x-6 xl:space-x-8 2xl:space-x-10 bg-white p-6 xl:p-10 absolute -bottom-32 lg:-bottom-16 justify-around items-start rounded-2xl`}
       >
         {mappedMenuItems}
       </div>

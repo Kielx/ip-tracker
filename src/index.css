@@ -576,8 +576,8 @@ video {
 .-bottom-72 {
 	bottom: -18rem;
 }
-.-bottom-40 {
-	bottom: -10rem;
+.-bottom-32 {
+	bottom: -8rem;
 }
 .z-10 {
 	z-index: 10;
@@ -711,8 +711,8 @@ video {
 .p-3 {
 	padding: 0.75rem;
 }
-.p-10 {
-	padding: 2.5rem;
+.p-6 {
+	padding: 1.5rem;
 }
 .py-6 {
 	padding-top: 1.5rem;
@@ -802,14 +802,6 @@ video {
 }
 @media (min-width: 768px) {
 
-	.md\:absolute {
-		position: absolute;
-	}
-
-	.md\:-bottom-16 {
-		bottom: -4rem;
-	}
-
 	.md\:flex {
 		display: flex;
 	}
@@ -818,43 +810,10 @@ video {
 		display: none;
 	}
 
-	.md\:w-\[90\%\] {
-		width: 90%;
-	}
-
-	.md\:max-w-full {
-		max-width: 100%;
-	}
-
-	.md\:flex-row {
-		flex-direction: row;
-	}
-
-	.md\:justify-around {
-		justify-content: space-around;
-	}
-
 	.md\:space-y-8 > :not([hidden]) ~ :not([hidden]) {
 		--tw-space-y-reverse: 0;
 		margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
 		margin-bottom: calc(2rem * var(--tw-space-y-reverse));
-	}
-
-	.md\:space-y-0 > :not([hidden]) ~ :not([hidden]) {
-		--tw-space-y-reverse: 0;
-		margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
-		margin-bottom: calc(0px * var(--tw-space-y-reverse));
-	}
-
-	.md\:space-x-10 > :not([hidden]) ~ :not([hidden]) {
-		--tw-space-x-reverse: 0;
-		margin-right: calc(2.5rem * var(--tw-space-x-reverse));
-		margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
-	}
-
-	.md\:px-10 {
-		padding-left: 2.5rem;
-		padding-right: 2.5rem;
 	}
 
 	.md\:text-3xl {
@@ -868,19 +827,10 @@ video {
 		bottom: -4rem;
 	}
 
-	.lg\:w-\[75\%\] {
-		width: 75%;
-	}
-
-	.lg\:space-x-10 > :not([hidden]) ~ :not([hidden]) {
+	.lg\:space-x-6 > :not([hidden]) ~ :not([hidden]) {
 		--tw-space-x-reverse: 0;
-		margin-right: calc(2.5rem * var(--tw-space-x-reverse));
-		margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
-	}
-
-	.lg\:px-20 {
-		padding-left: 5rem;
-		padding-right: 5rem;
+		margin-right: calc(1.5rem * var(--tw-space-x-reverse));
+		margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
 	}
 
 	.lg\:pb-24 {
@@ -889,13 +839,30 @@ video {
 }
 @media (min-width: 1280px) {
 
+	.xl\:space-x-8 > :not([hidden]) ~ :not([hidden]) {
+		--tw-space-x-reverse: 0;
+		margin-right: calc(2rem * var(--tw-space-x-reverse));
+		margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
+	}
+
+	.xl\:p-10 {
+		padding: 2.5rem;
+	}
+
 	.xl\:px-52 {
 		padding-left: 13rem;
 		padding-right: 13rem;
 	}
+}
+@media (min-width: 1536px) {
 
-	.xl\:py-10 {
-		padding-top: 2.5rem;
-		padding-bottom: 2.5rem;
+	.\32xl\:w-\[75\%\] {
+		width: 75%;
+	}
+
+	.\32xl\:space-x-10 > :not([hidden]) ~ :not([hidden]) {
+		--tw-space-x-reverse: 0;
+		margin-right: calc(2.5rem * var(--tw-space-x-reverse));
+		margin-left: calc(2.5rem * calc(1 - var(--tw-space-x-reverse)));
 	}
 }
