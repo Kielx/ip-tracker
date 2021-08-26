@@ -33,9 +33,7 @@ const Map = ({ lat, lng }) => {
       />
 
       <Marker position={position}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
+        <Popup>You are here!</Popup>
       </Marker>
     </MapContainer>
   );
