@@ -1,27 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import background from "../assets/images/pattern-bg.webp";
 import { Popover, Transition } from "@headlessui/react";
+import { getGeolocation } from "../services/GeolocationService";
 
-const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
+const Header = ({ geoLocationData, setGeoLocationData }) => {
+  const [searchIP, setSearchIP] = useState("");
+
   let menuItems;
-  if (!geoIP || geoIP === "" || geoIP === "undefined" || geoIP === "null") {
-    menuItems = {
-      ipAdress: "1.1.1.1",
-      location: `AU, State of New South Wales, Sydney`,
-      timezone: "+10:00",
-      isp: "Cloudflare, Inc.",
-    };
-  } else if (geoIP?.code === 400) {
+  if (!geoLocationData || geoLocationData === "" || geoLocationData === "undefined" || geoLocationData === "null") {
     menuItems = {
       Error:
         "AN ERROR OCCURRED. PLEASE TRY AGAIN WITH A DIFFERENT ADDRESS OR DOMAIN.",
     };
   } else {
     menuItems = {
-      ipAdress: geoIP?.ip,
-      location: `${geoIP?.location?.country}, ${geoIP?.location?.region}, ${geoIP?.location?.city}`,
-      timezone: geoIP?.location?.timezone,
-      isp: geoIP?.isp,
+      ipAdress: geoLocationData?.ip,
+      location: `${geoLocationData?.country_name}, ${geoLocationData?.state_prov}, ${geoLocationData?.city}`,
+      timezone: geoLocationData?.time_zone.name,
+      isp: geoLocationData?.isp,
     };
   }
 
@@ -60,7 +56,9 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
           aria-label="Search"
           onClick={(e) => {
             e.preventDefault();
-            getGeoIP(searchIP);
+            getGeolocation(searchIP).then((data) => {
+              setGeoLocationData(data);
+            });
           }}
           className="w-[15%]  hover:bg-indigo-800 transition-all bg-gray-800 text-gray-100 rounded-r-2xl  flex justify-center items-center"
         >
