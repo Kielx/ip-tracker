@@ -18,6 +18,7 @@ export async function getGeolocation(ipAddress){
     // If IP address is present, add it to the query parameters
     if (ipAddress){
       // Check if ip address is domain name and not ip address
+      // eslint-disable-next-line no-useless-escape
       if (ipAddress.match(/^[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}$/)){
         // If IP is domain name then look it up in DNS to get IP address
         ipAddress = await getIPFromDomain(ipAddress)

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 const fetch = require("node-fetch");
 
 async function getIPFromDomain(domain){
