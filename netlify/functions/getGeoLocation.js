@@ -15,7 +15,7 @@ exports.handler = async (event, context) => {
   try {
     let response;
     // Without IP address just use local IP by sending fetch request without query parameters
-    let searchString = `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.GEO_API_KEY}`
+    let searchString = `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.API_KEY}`
     // If IP address is present, add it to the query parameters
     if (event.queryStringParameters.ip){
       let ipAddress = event.queryStringParameters.ip
