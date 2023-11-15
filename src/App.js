@@ -8,30 +8,36 @@ const Map = React.lazy(() =>
   import(/* webpackChunkName: "Map" */ "./components/Map")
 );
 
+// Resolve domain name to ip address
+export async function getIPFromDomain(domain){
+  try {
+    const response = await fetch(`https://dns.google/resolve?name=${domain}`, { mode: "cors" });
+    let data = await response.json();
+    return data.Answer[0].data;
+  } catch (e) {
+    return null;
+  }
+}
+
 function App() {
   //eslint-disable-next-line
   const [localIP, setLocalIP] = useState("");
   const [geoIP, setGeoIP] = useState("");
   //eslint-disable-next-line
   const [searchIP, setSearchIP] = useState("");
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     //Fetch client IP
   }, []);
 
   async function getGeoIP(IP) {
+    //List of regexp rules to check if IP is valid IPv4 or domain name
     const rules = [
       {
         name: "ipRegexp",
         regexp: /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}$/,
         query: "ipAddress",
-      },
-      {
-        name: "emailRegexp",
-        regexp:
-          // eslint-disable-next-line no-control-regex
-          /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/,
-        query: "email",
       },
       {
         name: "domainRegexp",
@@ -40,15 +46,34 @@ function App() {
       },
     ];
 
-    rules.forEach(async (rule) => {
-      if (rule.regexp.test(IP)) {
+    // If IP is not valid IPv4 or domain name, return
+    if (!rules[0].regexp.test(IP) && !rules[1].regexp.test(IP)) {
+      setError(true);
+      return;
+    }
+
+    // If IP is domain name, resolve to IP address
+    if (rules[1].regexp.test(IP)) {
+      const ip = await getIPFromDomain(IP);
+      if(ip){
+        IP = ip;
+      }
+    }
+
+    // If IP is valid IPv4 or domain name, fetch geoIP data
+    if (rules[0].regexp.test(IP)) {
         try {
           //Remove when goes to prod
+          setError(false);
           const response = await fetch(
             process.env.REACT_APP_GEO_API_KEY
-              ? `https://geo.ipify.org/api/v1?apiKey=${process.env.REACT_APP_GEO_API_KEY}&${rule.query}=${IP}`
-              : `/.netlify/functions/getGeoIP?query=${rule.query}&ip=${IP}`
+              ? `https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.REACT_APP_GEO_API_KEY}&ip=${IP}`
+              : `/.netlify/functions/getGeoIP?ip=${IP}`
           );
+          if (!response.ok) {
+            setError(true);
+            return;
+          }
           let data = await response.json();
           return setGeoIP(data);
         } catch (e) {
@@ -56,7 +81,7 @@ function App() {
           return;
         }
       }
-    });
+    
   }
 
   useEffect(() => {
@@ -95,8 +120,9 @@ function App() {
           getGeoIP={getGeoIP}
           searchIP={searchIP}
           setSearchIP={setSearchIP}
+          error={error}
         />
-        <Map lat={geoIP?.location?.lat} lng={geoIP?.location?.lng}></Map>
+        <Map lat={geoIP?.latitude} lng={geoIP?.longitude}></Map>
       </Suspense>
     </div>
   );
