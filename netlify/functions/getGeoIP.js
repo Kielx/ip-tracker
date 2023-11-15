@@ -6,6 +6,12 @@ exports.handler = async (event, context) => {
   console.log(context);
   try {
     const response = await fetch(API_ENDPOINT);
+    if (!response.ok) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "Failed fetching data" }),
+      };
+    }
     const data = await response.json();
     return {
       statusCode: 200,
