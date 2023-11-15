@@ -2,7 +2,7 @@ import React from "react";
 import background from "../assets/images/pattern-bg.webp";
 import { Popover, Transition } from "@headlessui/react";
 
-const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
+const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP, error }) => {
   let menuItems;
   if (!geoIP || geoIP === "" || geoIP === "undefined" || geoIP === "null") {
     menuItems = {
@@ -19,8 +19,8 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
   } else {
     menuItems = {
       ipAdress: geoIP?.ip,
-      location: `${geoIP?.location?.country}, ${geoIP?.location?.region}, ${geoIP?.location?.city}`,
-      timezone: geoIP?.location?.timezone,
+      location: `${geoIP?.country_name}, ${geoIP?.state_prov}, ${geoIP?.city}`,
+      timezone: geoIP?.time_zone?.name,
       isp: geoIP?.isp,
     };
   }
@@ -66,15 +66,15 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-chevron-right"
+            className="icon icon-tabler icon-tabler-chevron-right"
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            stroke-width="2.5"
+            strokeWidth="2.5"
             stroke="#ffffff"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <polyline points="9 6 15 12 9 18" />
@@ -114,7 +114,7 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
           leaveTo="transform scale-95 opacity-0"
         >
           <Popover.Panel className="absolute -bottom-72 z-10 w-full max-w-md bg-white rounded-2xl shadow-xl py-6 space-y-1">
-            {mappedMenuItems}
+          {error ? <p className="font-bold text-center">An error occured while fetching data</p> : mappedMenuItems}
           </Popover.Panel>
         </Transition>
       </Popover>
@@ -122,7 +122,7 @@ const Header = ({ geoIP, getGeoIP, searchIP, setSearchIP }) => {
         style={{ zIndex: "2" }}
         className={`hidden shadow-xl md:flex flex-row w-[90%] 2xl:w-[75%] space-x-4 lg:space-x-6 xl:space-x-8 2xl:space-x-10 bg-white p-6 xl:p-10 absolute -bottom-32 lg:-bottom-16 justify-around items-start rounded-2xl`}
       >
-        {mappedMenuItems}
+        {error ? <p className="font-bold text-center">An error occured while fetching data</p> : mappedMenuItems}
       </div>
     </div>
   );
